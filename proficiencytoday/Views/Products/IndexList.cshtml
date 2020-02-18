@@ -1,0 +1,41 @@
+﻿@model IEnumerable<proficiencytoday.Models.Business_logic.Product>
+
+@{
+    ViewBag.Title = "IndexList";
+}
+
+<h2>IndexList</h2>
+<p>
+    @Html.ActionLink("View Cart", "ViewCart","Cart",null,null)
+</p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("AddToCart", "AddtoCart", "Cart",new { id=item.ProductId },null) |
+            @Html.ActionLink("RemoveCart", "RemoveCart", "Cart",new { id=item.ProductId },null) |
+            
+        </td>
+    </tr>
+}
+
+</table>

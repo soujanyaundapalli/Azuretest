@@ -1,0 +1,49 @@
+﻿@model IEnumerable<proficiencytoday.Models.Business_logic.Product>
+
+@{
+    ViewBag.Title = "ViewCart";
+}
+
+<h2>ViewCart</h2>
+
+    @if (Session["CartCount"] != null)
+    {
+<p>@Session["CartCount"]</p>
+
+}
+
+    <p>
+        @Html.ActionLink("ContinuePayment", "Create","CardDatas",null,null)
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+        @if (Session["ProductList"] != null && Session["CartCount"] != null)
+        {
+
+            foreach (var item in (IEnumerable<proficiencytoday.Models.Business_logic.Product>)Session["ProductList"])
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("AddToCart", "AddtoCart", "Cart", new { id = item.ProductId }, null) |
+                        @Html.ActionLink("RemoveCart", "RemoveCart", "Cart", new { id = item.ProductId }, null) |
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </table>
